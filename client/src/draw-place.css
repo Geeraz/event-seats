@@ -1,0 +1,212 @@
+.draw-place-container {
+  position: relative;
+}
+.draw-place-container h5 {
+  text-align: center;
+  color: #455cd9;
+  margin: 30px auto;
+  font-weight: 600;
+}
+.draw-place-container .add-image-label {
+  margin: 0 auto;
+  width: fit-content;
+  display: block;
+}
+.draw-place-container .add-image-label .plus-icon {
+  display: block;
+  width: 35px;
+  margin: 0 auto;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.draw-place-container .add-image-label .plus-icon:hover {
+  transform: translateY(-2px);
+}
+.draw-place-container .buttons-wrapper {
+  padding: 30px;
+  display: flex;
+}
+.draw-place-container .buttons-wrapper .active-link {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 2px -2px gray;
+}
+.draw-place-container .buttons-wrapper a {
+  text-decoration: none;
+  background-color: #f4cd46;
+  color: #343434;
+  font-weight: 600;
+  padding: 10px 30px;
+  border-radius: 20px;
+  margin-right: 20px;
+  display: flex;
+  width: fit-content;
+  align-items: center;
+}
+.draw-place-container .buttons-wrapper a:last-child {
+  margin-right: 0;
+}
+.draw-place-container .buttons-wrapper a:last-child img {
+  width: 20px;
+}
+.draw-place-container .buttons-wrapper a:hover {
+  transform: translateY(-2px);
+}
+.draw-place-container .buttons-wrapper a .rectangle {
+  width: 25px;
+  height: 15px;
+  border: 2px dashed rgba(65, 65, 65, 0.697);
+  border-radius: 2px;
+  display: inline-block;
+  margin-left: 8px;
+  pointer-events: none;
+}
+.draw-place-container .buttons-wrapper a img {
+  width: 25px;
+  margin-left: 8px;
+  pointer-events: none;
+}
+.draw-place-container .img-container {
+  width: 100%;
+  background-color: #fff;
+  padding: 50px 0;
+}
+.draw-place-container .img-container img {
+  margin: 0 auto;
+}
+.draw-place-container .img-container svg {
+  margin: 0 auto;
+  display: block;
+}
+.draw-place-container .img-container svg g rect,
+.draw-place-container .img-container svg g circle {
+  transition: none;
+}
+.draw-place-container .img-container svg image {
+  width: 100%;
+}
+.draw-place-container .img-container .highlighted {
+  fill: rgba(244, 206, 70, 0.794);
+}
+.draw-place-container .img-container .done {
+  fill: rgba(102, 179, 102, 0.802);
+  pointer-events: none;
+}
+.draw-place-container .save-map {
+  width: fit-content;
+  display: flex;
+  margin: 30px auto 0;
+  text-decoration: none;
+  background-color: #f4cd46;
+  color: #343434;
+  font-weight: 600;
+  padding: 10px 30px;
+  border-radius: 20px;
+  align-items: center;
+}
+.draw-place-container .save-map:hover {
+  transform: translateY(-2px);
+}
+.draw-place-container .save-map img {
+  width: 20px;
+  pointer-events: none;
+  margin-left: 10px;
+}
+.draw-place-container .draw-modal {
+  position: absolute;
+  background-color: #fff;
+  width: fit-content;
+  border-radius: 10px;
+  top: 30%;
+  transform: translateY(-50%);
+  right: 0;
+  left: 0;
+  margin: 0 auto;
+  z-index: 9999;
+  width: 100%;
+  max-width: 400px;
+  padding: 30px 10px;
+}
+.draw-place-container .draw-modal h6 {
+  text-align: center;
+  font-weight: 600;
+}
+.draw-place-container .draw-modal .main-modal-heading {
+  margin-bottom: 30px;
+}
+.draw-place-container .draw-modal div {
+  background-color: #d9def7;
+  border-radius: 5px;
+  padding: 0 0 10px 0;
+}
+.draw-place-container .draw-modal div p {
+  display: inline-block;
+  margin: 0;
+  text-align: left;
+  width: fit-content;
+  background-color: #c3c7de;
+  margin-right: auto;
+  border-top-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 5px;
+}
+.draw-place-container .draw-modal div input {
+  margin: 0 auto;
+  display: block;
+  width: 100%;
+  max-width: 150px;
+  height: 30px;
+  text-align: center;
+  font-size: 15px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}
+.draw-place-container .draw-modal div input:focus {
+  outline: none;
+}
+.draw-place-container .draw-modal div h6 {
+  color: #343434;
+  font-size: 16px;
+}
+.draw-place-container .draw-modal div img {
+  width: 25px;
+  cursor: pointer;
+  margin: 0 auto;
+  display: block;
+  margin-top: 30px;
+}
+.draw-place-container .draw-modal div .row-wrapper {
+  height: 115px;
+  overflow-y: auto;
+}
+.draw-place-container .draw-modal .seats-price-wrapper {
+  margin-top: 30px;
+}
+.draw-place-container .draw-modal .seats-price-wrapper input {
+  margin: 20px auto;
+}
+.draw-place-container .draw-modal .save-zone {
+  display: block;
+  text-decoration: none;
+  width: fit-content;
+  margin: 20px auto 0;
+  background-color: #f4cd46;
+  color: #343434;
+  font-weight: 600;
+  padding: 5px 30px;
+  border-radius: 20px;
+}
+.draw-place-container .draw-modal .save-zone:hover {
+  transform: translateY(-2px);
+}
+.draw-place-container .blur {
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(97, 150, 186, 0.404);
+  background-color: rgba(97, 150, 186, 0.404);
+  backdrop-filter: blur(5px);
+  z-index: 9998;
+}
