@@ -11,7 +11,104 @@ export const DrawPlace = () => {
   const [shape, setShape] = useState(Mode.RECT);
   const [numOfRows, setNumOfRows] = useState(1);
   const [modal, setVisibility] = useState(false);
-  const [zones, setZones] = useState([]);
+  const [zones, setZones] = useState({});
+  const [objectName, setObjectName] = useState("");
+  const [location, setLocation] = useState("");
+  const [zoneName, setZoneName] = useState("");
+  const [selectedType, setSelectedType] = useState("hall"); //
+  const [data, setData] = useState({
+    _id: { $oid: "64ef2f9bfeca31881df8edbc" },
+    zones: {
+      Tribina: {
+        amount: 1512,
+        max_amount: 1512,
+        price: 10,
+        name: "Regular",
+        location: {
+          position: {
+            x: "72",
+            y: "88",
+          },
+          size: {
+            width: "147",
+            height: "75",
+          },
+          shape: "rect",
+        },
+        rows: {
+          III: {
+            seats: [1, 4, 5, 6, 7, 8, 9, 13, 14, 15, 16, 17, 18, 19],
+            total_seats: "19",
+          },
+          IV: {
+            seats: [
+              1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 16, 17, 18, 19, 20, 21, 22, 23,
+            ],
+            total_seats: "23",
+          },
+        },
+        seatPrice: "15",
+      },
+      Tribina2: {
+        amount: 1512,
+        max_amount: 1512,
+        price: 10,
+        name: "Regular",
+        location: {
+          position: {
+            x: "362",
+            y: "88",
+          },
+          size: {
+            width: "147",
+            height: "75",
+          },
+          shape: "rect",
+        },
+        rows: {
+          I: {
+            seats: [1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 14, 15, 16, 17, 18, 19],
+            total_seats: "19",
+          },
+          II: {
+            seats: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 20, 21, 22, 23],
+            total_seats: "23",
+          },
+        },
+        seatPrice: "15",
+      },
+      Tribina3: {
+        amount: 1512,
+        max_amount: 1512,
+        price: 10,
+        name: "Regular",
+        location: {
+          points: "73,169 72,238 215,241 214,169",
+          shape: "polygon",
+        },
+        rows: {
+          C: {
+            seats: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+            total_seats: "15",
+          },
+          D: {
+            seats: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+            total_seats: "12",
+          },
+          F: {
+            seats: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+            total_seats: "12",
+          },
+        },
+        seatPrice: "10",
+      },
+    },
+    name: "Zetra",
+    location: "Test",
+    type: "hall",
+    __v: 0,
+  });
+  const [rows, setRows] = useState();
 
   const handleImageUpload = (event) => {
     const selectedImage = event.target.files[0];
@@ -89,11 +186,13 @@ export const DrawPlace = () => {
   function addRows() {
     setNumOfRows((numOfRows) => numOfRows + 1);
   }
+
   // Save zone
   function saveZone() {
     const zone = document.querySelector(".highlighted");
 
     const rowElements = document.querySelectorAll(".rows-wrapper > div");
+    const zoneName = document.querySelector(".zone-input").value;
 
     let zonesData;
 
@@ -141,9 +240,13 @@ export const DrawPlace = () => {
     const seatPriceInput = document.querySelector(".seats-price-wrapper input");
     const seatPrice = seatPriceInput.value;
 
-    zonesData.seatPrice = seatPrice;
+    zonesData.seatPrice = Number(seatPrice);
 
-    setZones([...zones, zonesData]);
+    setZones((prevZones) => ({
+      ...prevZones,
+      [zoneName]: zonesData, // Use the zone name as the key
+    }));
+    console.log(zones);
     //
     //
     //
@@ -171,17 +274,39 @@ export const DrawPlace = () => {
     }
   }
 
-  function handleZoneClick(params) {
-    console.log("clicked");
+  function handleZoneClick(e, data) {
+    if (document.querySelector(".highlighted"))
+      document.querySelector(".highlighted").classList.remove("highlighted");
+    e.target.classList.add("highlighted");
+
+    setRows(data[1].rows);
   }
 
-  saveData();
+  const saveData = () => {
+    // Create the object with input values and selected type
+    const newData = {
+      name: objectName,
+      location,
+      type: selectedType,
+      zones: zones,
+    };
 
+    console.log(newData);
+  };
   return (
     <div style={img && { height: "100vh" }} className="draw-place-container">
       {modal && (
         <>
           <div className="draw-modal">
+            <input
+              className="zone-input"
+              type="string"
+              placeholder="Naziv zone"
+              onInput={(e) => {
+                e.target.style = "outline: none;";
+                setZoneName(e.target.value); // Update the state with input value
+              }}
+            />
             <h6 className="main-modal-heading">Zone Information</h6>
             <div>
               <p>Rows</p>
@@ -265,28 +390,35 @@ export const DrawPlace = () => {
         <>
           <div className="zone-inputs">
             <input
-              className="zone-input"
+              className="zone"
               type="text"
               placeholder="Naziv objekta"
               onInput={(e) => {
                 e.target.style = "outline: none;";
+                setObjectName(e.target.value); // Update the state with input value
               }}
             />
 
             <input
-              className="zone-input"
+              className="zone"
               type="text"
               placeholder="Lokacija objekta"
               onInput={(e) => {
                 e.target.style = "outline: none;";
+                setLocation(e.target.value); // Update the state with input value
               }}
             />
 
-            <select className="zone-input">
-              <option value="hall">Hall</option>
-              <option value="medium-hall">Medium Hall</option>
-              <option value="big-hall">Big Hall</option>
-              <option value="stadium">Stadium</option>
+            <select
+              className="zone"
+              onChange={(e) => setSelectedType(e.target.value)} // Update the state with selected value
+              value={selectedType} // Controlled component value
+            >
+              <option value="hall">Mala Dvorana</option>
+              <option value="medium-hall">Dvorana</option>
+              <option value="theater">Kazalište</option>
+              <option value="big-hall">Velika Dvorana</option>
+              <option value="stadium">Stadion</option>
             </select>
           </div>
           <div className="buttons-wrapper">
@@ -338,36 +470,40 @@ export const DrawPlace = () => {
             Spremi
             <img src={Save} alt="Spremi" />
           </a>
-          <div className="img-container">
+          <div className="img-container img-scnd-container">
             <ImageMapper
-              mode={shape}
+              mode={Mode.SELECT}
               cb={(editor) => {
                 editor.loadImage(img.src);
                 editor.polygon();
               }}
               options={{ width: img.width, height: img.height }}
-              handleShapeClick={handleZoneClick}
-              preDrawnShapes={[
-                {
-                  type: "rectangle",
-                  zoneName: "Tribina 1",
-                  rows: [],
-                  data: {
-                    x: 255,
-                    y: 87,
-                    width: 164,
-                    height: 87,
-                  },
-                },
-                {
-                  type: "polygon",
-                  zoneName: "Tribina 1",
-                  data: {
-                    points: "56,86 7,129 7,174 75,173 76,88",
-                  },
-                },
-              ]}
+              handleZoneClick={handleZoneClick}
+              preDrawnShapes={data}
             />
+            <div className="seats-container">
+              <h5>{rows ? "Odaberite sjedalo" : "Niste odabrali zonu"}</h5>
+              {rows &&
+                Object.entries(rows).map(([key, value], i) => {
+                  return (
+                    <div key={i}>
+                      <h6>Red {key}</h6>
+                      {Array.from({ length: value.total_seats }, (_, index) => (
+                        <div
+                          className={`seat ${
+                            !value.seats.includes(index + 1)
+                              ? "reserved-seat"
+                              : ""
+                          }`}
+                          key={index}
+                        >
+                          Sjedalo {index + 1}
+                        </div>
+                      ))}
+                    </div>
+                  );
+                })}
+            </div>
           </div>
         </>
       )}
