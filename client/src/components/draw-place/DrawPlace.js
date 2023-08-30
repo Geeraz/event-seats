@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import Plus from '../../images/plus_icon.svg';
-import HandDrawn from '../../images/hand_drawn.svg';
-import Edit from '../../images/edit_icon2.svg';
-import Save from '../../images/save_icon.svg';
-import ImageMapper, { Mode } from './image-mapper/ImageMapper';
-import '../../draw-place.css';
+import React, { useEffect, useState } from "react";
+import Plus from "../../images/plus_icon.svg";
+import HandDrawn from "../../images/hand_drawn.svg";
+import Edit from "../../images/edit_icon2.svg";
+import Save from "../../images/save_icon.svg";
+import ImageMapper, { Mode } from "./image-mapper/ImageMapper";
+import "../../draw-place.css";
 
 export const DrawPlace = () => {
   const [img, setImg] = useState();
@@ -22,10 +22,6 @@ export const DrawPlace = () => {
 
       // Set up the onload event handler
       imgElement.onload = () => {
-        // Here, you have access to imgElement.width and imgElement.height
-        console.log(imgElement.width);
-        console.log(imgElement.height);
-
         setImg({
           src: imageUrl,
           filename: selectedImage.name,
@@ -43,48 +39,48 @@ export const DrawPlace = () => {
   function handleShapeClick(e) {
     const tagName = e.target.tagName.toLowerCase();
 
-    if (tagName === 'polygon' || tagName === 'rect') {
-      if (document.querySelector('.highlighted'))
-        document.querySelector('.highlighted').classList.remove('highlighted');
-      e.target.classList.add('highlighted');
+    if (tagName === "polygon" || tagName === "rect") {
+      if (document.querySelector(".highlighted"))
+        document.querySelector(".highlighted").classList.remove("highlighted");
+      e.target.classList.add("highlighted");
       setVisibility(true);
     } else {
-      if (document.querySelector('.highlighted') && tagName !== 'circle')
-        document.querySelector('.highlighted').classList.remove('highlighted');
+      if (document.querySelector(".highlighted") && tagName !== "circle")
+        document.querySelector(".highlighted").classList.remove("highlighted");
     }
   }
 
   // Set active link
   function setActiveLink(e) {
-    document.querySelector('.active-link').classList.remove('active-link');
-    e.target.classList.add('active-link');
-    if (document.querySelector('.highlighted'))
-      document.querySelector('.highlighted').classList.remove('highlighted');
+    document.querySelector(".active-link").classList.remove("active-link");
+    e.target.classList.add("active-link");
+    if (document.querySelector(".highlighted"))
+      document.querySelector(".highlighted").classList.remove("highlighted");
   }
 
   useEffect(() => {
     function handleDelete(event) {
-      if (event.key === 'Backspace' && document.querySelector('.highlighted')) {
-        const highlighted = document.querySelector('.highlighted');
+      if (event.key === "Backspace" && document.querySelector(".highlighted")) {
+        const highlighted = document.querySelector(".highlighted");
 
         document
           .querySelectorAll('circle[visibility="visible"]')
           .forEach((circle) => {
-            circle.style.visibility = 'hidden';
+            circle.style.visibility = "hidden";
           });
         highlighted.remove();
       }
     }
 
     if (!modal) {
-      document.addEventListener('keydown', handleDelete);
+      document.addEventListener("keydown", handleDelete);
     } else {
-      document.removeEventListener('keydown', handleDelete);
+      document.removeEventListener("keydown", handleDelete);
     }
 
     // Clean up the event listener when the component unmounts or when modal changes
     return () => {
-      document.removeEventListener('keydown', handleDelete);
+      document.removeEventListener("keydown", handleDelete);
     };
   }, [modal]);
 
@@ -98,8 +94,8 @@ export const DrawPlace = () => {
     let counter = 0;
 
     document.querySelectorAll(`.zone-input`).forEach((e, i) => {
-      if (e.value === '') {
-        e.style = 'outline: 2px solid #f4cd46;';
+      if (e.value === "") {
+        e.style = "outline: 2px solid #f4cd46;";
         counter++;
       }
     });
@@ -109,18 +105,18 @@ export const DrawPlace = () => {
     } else {
       setVisibility(false);
       setNumOfRows(1);
-      document.querySelector('.highlighted').classList.add('done');
-      document.querySelector('.highlighted').classList.remove('highlighted');
+      document.querySelector(".highlighted").classList.add("done");
+      document.querySelector(".highlighted").classList.remove("highlighted");
       document
         .querySelectorAll('circle[visibility="visible"]')
         .forEach((circle) => {
-          circle.style.visibility = 'hidden';
+          circle.style.visibility = "hidden";
         });
     }
   }
 
   return (
-    <div style={img && { height: '100vh' }} className="draw-place-container">
+    <div style={img && { height: "100vh" }} className="draw-place-container">
       {modal && (
         <>
           <div className="draw-modal">
@@ -136,7 +132,7 @@ export const DrawPlace = () => {
                       type="number"
                       placeholder="Broj sjedala"
                       onInput={(e) => {
-                        e.target.style = 'outline: none;';
+                        e.target.style = "outline: none;";
                       }}
                     />
                   </div>
@@ -148,7 +144,7 @@ export const DrawPlace = () => {
               <p>Cijena sjedala za ovu zonu</p>
               <input
                 onInput={(e) => {
-                  e.target.style = 'outline: none;';
+                  e.target.style = "outline: none;";
                 }}
                 className="zone-input"
                 type="number"
@@ -179,7 +175,7 @@ export const DrawPlace = () => {
           <h5 className="test">Unesite sliku za iscrtavanje</h5>
           <label className="add-image-label">
             <input
-              style={{ display: 'none' }}
+              style={{ display: "none" }}
               type="file"
               accept="image/*"
               onChange={handleImageUpload}
@@ -248,7 +244,8 @@ export const DrawPlace = () => {
               handleShapeClick={handleShapeClick}
               preDrawnShapes={[
                 {
-                  type: 'rectangle',
+                  type: "rectangle",
+                  zone: "zona1",
                   data: {
                     x: 255,
                     y: 87,
@@ -257,9 +254,9 @@ export const DrawPlace = () => {
                   },
                 },
                 {
-                  type: 'polygon',
+                  type: "polygon",
                   data: {
-                    points: '56,86 7,129 7,174 75,173 76,88',
+                    points: "56,86 7,129 7,174 75,173 76,88",
                   },
                 },
               ]}
