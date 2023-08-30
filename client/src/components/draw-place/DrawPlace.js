@@ -11,6 +11,7 @@ export const DrawPlace = () => {
   const [shape, setShape] = useState(Mode.RECT);
   const [numOfRows, setNumOfRows] = useState(1);
   const [modal, setVisibility] = useState(false);
+  const [data, setData] = useState();
 
   const handleImageUpload = (event) => {
     const selectedImage = event.target.files[0];
@@ -96,7 +97,7 @@ export const DrawPlace = () => {
   // Save zone
   function saveZone() {
     let counter = 0;
-
+    console.log(document.querySelector('.highlighted'));
     document.querySelectorAll(`.zone-input`).forEach((e, i) => {
       if (e.value === '') {
         e.style = 'outline: 2px solid #f4cd46;';
@@ -117,6 +118,10 @@ export const DrawPlace = () => {
           circle.style.visibility = 'hidden';
         });
     }
+  }
+
+  function handleZoneClick(params) {
+    console.log('clicked');
   }
 
   return (
@@ -245,10 +250,11 @@ export const DrawPlace = () => {
                 editor.polygon();
               }}
               options={{ width: img.width, height: img.height }}
-              handleShapeClick={handleShapeClick}
+              handleShapeClick={handleZoneClick}
               preDrawnShapes={[
                 {
                   type: 'rectangle',
+                  zoneName: 'Tribina 1',
                   data: {
                     x: 255,
                     y: 87,
@@ -258,6 +264,7 @@ export const DrawPlace = () => {
                 },
                 {
                   type: 'polygon',
+                  zoneName: 'Tribina 1',
                   data: {
                     points: '56,86 7,129 7,174 75,173 76,88',
                   },
