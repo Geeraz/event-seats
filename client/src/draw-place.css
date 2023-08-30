@@ -81,6 +81,14 @@
 .draw-place-container .img-container svg g circle {
   transition: none;
 }
+rect,
+polygon {
+  transition: opacity 0.2s;
+}
+rect:hover,
+polygon:hover {
+  opacity: 0.8;
+}
 .draw-place-container .img-container svg image {
   width: 100%;
 }
@@ -209,4 +217,37 @@
   background-color: rgba(97, 150, 186, 0.404);
   backdrop-filter: blur(5px);
   z-index: 9998;
+}
+.img-scnd-container {
+  display: flex;
+}
+.img-scnd-container svg {
+  margin: 0 0 0 auto !important;
+}
+.img-scnd-container .seats-container {
+  margin: 0 auto;
+  width: 200px;
+  height: 300px;
+  background-color: #c3c7de;
+  padding: 10px;
+  overflow-y: auto;
+}
+.seat {
+  background-color: #fff;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.seat:hover {
+  transform: translateY(-3px);
+}
+.reserved-seat {
+  background-color: red;
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.reserved-seat:hover {
+  transform: translateY(0);
 }

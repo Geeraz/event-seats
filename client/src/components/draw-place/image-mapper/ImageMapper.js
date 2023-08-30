@@ -8,6 +8,7 @@ function ImageMapper({
   mode,
   handleShapeClick,
   preDrawnShapes,
+  handleZoneClick,
 }) {
   const elementRef = React.useRef(null);
   const editorRef = React.useRef(null);
@@ -55,47 +56,119 @@ function ImageMapper({
       viewBox={`0, 0, ${options.width}, ${options.height}`}
       preserveAspectRatio="xMinYMin"
       onClick={(e) => {
-        handleShapeClick(e);
+        if (!preDrawnShapes) {
+          handleShapeClick(e);
+        }
       }}
     >
       {preDrawnShapes &&
-        preDrawnShapes.map((shape, index) => {
-          if (shape.type === 'rectangle') {
-            return (
-              <rect
-                key={`rect_${index}`}
-                fill="rgb(102, 102, 102)"
-                stroke="rgb(51, 51, 51)"
-                cursor="pointer"
-                strokeWidth="1"
-                opacity="0.5"
-                strokeDasharray="none"
-                strokeLinejoin="miter"
-                id={shape.zoneName}
-                width={shape.data.width}
-                x={shape.data.x}
-                height={shape.data.height}
-                y={shape.data.y}
-              ></rect>
-            );
-          } else if (shape.type === 'polygon') {
-            return (
-              <polygon
-                key={`pol_${index}`}
-                points={shape.data.points}
-                fill="rgb(102, 102, 102)"
-                stroke="rgb(51, 51, 51)"
-                cursor="pointer"
-                strokeWidth="1"
-                opacity="0.5"
-                strokeDasharray="4 3"
-                strokeLinejoin="round"
-                id={shape.zoneName}
-              ></polygon>
-            );
+        Object.entries(preDrawnShapes.zones).map(
+          ([zoneName, zoneData], index) => {
+            let centerX, centerY;
+
+            if (zoneData.location.shape === 'rect') {
+              // Calculate center for rectangle
+              centerX =
+                Number(zoneData.location.position.x) +
+                Number(zoneData.location.size.width) / 2;
+              centerY =
+                Number(zoneData.location.position.y) +
+                Number(zoneData.location.size.height) / 2;
+            } else if (zoneData.location.shape === 'polygon') {
+              // Calculate center for polygon
+              const pointsArray = zoneData.location.points
+                .split(' ')
+                .map((point) =>
+                  point.split(',').map((coord) => parseInt(coord))
+                );
+              const xSum = pointsArray.reduce(
+                (sum, point) => sum + point[0],
+                0
+              );
+              const ySum = pointsArray.reduce(
+                (sum, point) => sum + point[1],
+                0
+              );
+              centerX = xSum / pointsArray.length;
+              centerY = ySum / pointsArray.length;
+            }
+
+            if (zoneData.location.shape === 'rect') {
+              return (
+                <g key={`rect_${index}`}>
+                  <rect
+                    fill="rgb(102, 102, 102)"
+                    stroke="rgb(51, 51, 51)"
+                    cursor="pointer"
+                    strokeWidth="1"
+                    opacity="0.5"
+                    strokeDasharray="none"
+                    strokeLinejoin="miter"
+                    id={zoneName}
+                    width={zoneData.location.size.width}
+                    x={zoneData.location.position.x}
+                    height={zoneData.location.size.height}
+                    y={zoneData.location.position.y}
+                    onClick={(e) => {
+                      handleZoneClick(e, [zoneName, zoneData]);
+                    }}
+                  ></rect>
+                  <text
+                    x={centerX}
+                    y={centerY}
+                    dominantBaseline="middle"
+                    textAnchor="middle"
+                    fontSize="12"
+                    fill="black"
+                    style={{
+                      pointerEvents: 'none',
+                      fill: '#455cd9',
+                      fontWeight: '600',
+                    }}
+                  >
+                    {zoneName}
+                  </text>
+                </g>
+              );
+            } else if (zoneData.location.shape === 'polygon') {
+              // Similar modification for polygons
+              return (
+                <g key={`pol_${index}`}>
+                  <polygon
+                    points={zoneData.location.points}
+                    fill="rgb(102, 102, 102)"
+                    stroke="rgb(51, 51, 51)"
+                    cursor="pointer"
+                    strokeWidth="1"
+                    opacity="0.5"
+                    strokeDasharray="none"
+                    strokeLinejoin="miter"
+                    id={zoneName}
+                    onClick={(e) => {
+                      handleZoneClick(e, [zoneName, zoneData]);
+                    }}
+                  ></polygon>
+                  <text
+                    x={centerX}
+                    y={centerY}
+                    dominantBaseline="middle"
+                    textAnchor="middle"
+                    fontSize="12"
+                    fill="black"
+                    style={{
+                      pointerEvents: 'none',
+                      fill: '#455cd9',
+                      fontWeight: '600',
+                    }}
+                  >
+                    {zoneName}
+                  </text>
+                </g>
+              );
+            }
+            return null;
           }
-          return null;
-        })}
+        )}
     </svg>
   );
 }
