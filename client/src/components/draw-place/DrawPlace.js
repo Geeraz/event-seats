@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import Plus from "../../images/plus_icon.svg";
-import HandDrawn from "../../images/hand_drawn.svg";
-import Edit from "../../images/edit_icon2.svg";
-import Save from "../../images/save_icon.svg";
-import ImageMapper, { Mode } from "./image-mapper/ImageMapper";
-import "../../draw-place.css";
+import React, { useEffect, useState } from 'react';
+import Plus from '../../images/plus_icon.svg';
+import HandDrawn from '../../images/hand_drawn.svg';
+import Edit from '../../images/edit_icon2.svg';
+import Save from '../../images/save_icon.svg';
+import ImageMapper, { Mode } from './image-mapper/ImageMapper';
+import '../../draw-place.css';
 
 export const DrawPlace = () => {
   const [img, setImg] = useState();
@@ -12,101 +12,254 @@ export const DrawPlace = () => {
   const [numOfRows, setNumOfRows] = useState(1);
   const [modal, setVisibility] = useState(false);
   const [zones, setZones] = useState({});
-  const [objectName, setObjectName] = useState("");
-  const [location, setLocation] = useState("");
-  const [zoneName, setZoneName] = useState("");
-  const [selectedType, setSelectedType] = useState("hall"); //
+  const [objectName, setObjectName] = useState('');
+  const [location, setLocation] = useState('');
+  const [zoneName, setZoneName] = useState('');
+  const [selectedType, setSelectedType] = useState('hall'); //
   const [data, setData] = useState({
-    _id: { $oid: "64ef2f9bfeca31881df8edbc" },
+    name: 'BNP',
+    location: 'Zenica',
+    type: 'theater',
     zones: {
-      Tribina: {
-        amount: 1512,
-        max_amount: 1512,
-        price: 10,
-        name: "Regular",
+      I: {
         location: {
-          position: {
-            x: "72",
-            y: "88",
-          },
-          size: {
-            width: "147",
-            height: "75",
-          },
-          shape: "rect",
-        },
-        rows: {
-          III: {
-            seats: [1, 4, 5, 6, 7, 8, 9, 13, 14, 15, 16, 17, 18, 19],
-            total_seats: "19",
-          },
-          IV: {
-            seats: [
-              1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 16, 17, 18, 19, 20, 21, 22, 23,
-            ],
-            total_seats: "23",
-          },
-        },
-        seatPrice: "15",
-      },
-      Tribina2: {
-        amount: 1512,
-        max_amount: 1512,
-        price: 10,
-        name: "Regular",
-        location: {
-          position: {
-            x: "362",
-            y: "88",
-          },
-          size: {
-            width: "147",
-            height: "75",
-          },
-          shape: "rect",
+          points:
+            '1495,1240 1295,1157 1104,1123 856,1145 603,1253 582,1217 843,1102 1105,1077 1307,1110 1517,1197 1506,1221',
+          shape: 'polygon',
         },
         rows: {
           I: {
-            seats: [1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 14, 15, 16, 17, 18, 19],
-            total_seats: "19",
-          },
-          II: {
-            seats: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 20, 21, 22, 23],
-            total_seats: "23",
+            seats: [
+              1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+              20, 21,
+            ],
+            total_seats: '21',
           },
         },
-        seatPrice: "15",
+        seatPrice: 15,
       },
-      Tribina3: {
-        amount: 1512,
-        max_amount: 1512,
-        price: 10,
-        name: "Regular",
+      II: {
         location: {
-          points: "73,169 72,238 215,241 214,169",
-          shape: "polygon",
+          points:
+            '1566,1196 1310,1084 1104,1053 845,1074 533,1215 514,1180 837,1035 1108,1006 1321,1044 1585,1159',
+          shape: 'polygon',
         },
         rows: {
-          C: {
-            seats: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
-            total_seats: "15",
-          },
-          D: {
-            seats: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-            total_seats: "12",
-          },
-          F: {
-            seats: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-            total_seats: "12",
+          II: {
+            seats: [
+              1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+              20, 21, 22, 23,
+            ],
+            total_seats: '23',
           },
         },
-        seatPrice: "10",
+        seatPrice: 15,
+      },
+      III: {
+        location: {
+          points:
+            '1647,1165 1350,1028 1109,981 847,1002 472,1174 446,1135 847,957 1113,936 1366,988 1669,1127',
+          shape: 'polygon',
+        },
+        rows: {
+          III: {
+            seats: [
+              1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+              20, 21, 22, 23, 24, 25, 26, 27,
+            ],
+            total_seats: '27',
+          },
+        },
+        seatPrice: 15,
+      },
+      IV: {
+        location: {
+          points:
+            '1686,1103 1524,1023 1366,954 1115,907 1115,907 847,931 637,1010 426,1117 397,1081 616,967 840,888 1119,864 1371,912 1543,984 1709,1071',
+          shape: 'polygon',
+        },
+        rows: {
+          IV: {
+            seats: [
+              1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+              20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
+            ],
+            total_seats: '29',
+          },
+        },
+        seatPrice: 15,
+      },
+      V: {
+        location: {
+          points:
+            '1730,1048 1492,919 1312,863 1123,837 908,848 711,894 536,964 379,1063 351,1024 517,924 696,849 902,805 1125,791 1320,817 1506,874 1757,1012',
+          shape: 'polygon',
+        },
+        rows: {
+          V: {
+            seats: [
+              1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+              20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
+            ],
+            total_seats: '31',
+          },
+        },
+        seatPrice: 15,
+      },
+      VI: {
+        location: {
+          points:
+            '1778,994 1535,855 1311,785 1121,763 896,774 667,829 498,902 336,1003 312,964 469,866 650,789 889,729 1124,719 1318,741 1549,814 1806,957',
+          shape: 'polygon',
+        },
+        rows: {
+          VI: {
+            seats: [
+              1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+              20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
+            ],
+            total_seats: '33',
+          },
+        },
+        seatPrice: 15,
+      },
+      VII: {
+        location: {
+          points:
+            '1742,881 1447,745 1129,690 849,707 621,764 369,896 342,856 604,727 840,658 1126,644 1460,704 1765,846',
+          shape: 'polygon',
+        },
+        rows: {
+          VII: {
+            seats: [
+              1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+              20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
+            ],
+            total_seats: '31',
+          },
+        },
+        seatPrice: 15,
+      },
+      VIII: {
+        location: {
+          points:
+            '1750,800 1494,685 1128,615 848,631 576,706 368,807 345,770 559,662 841,586 1127,570 1504,641 1772,763',
+          shape: 'polygon',
+        },
+        rows: {
+          VIII: {
+            seats: [
+              1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+              20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
+            ],
+            total_seats: '31',
+          },
+        },
+        seatPrice: 15,
+      },
+      IX: {
+        location: {
+          points:
+            '1743,718 1490,609 1127,543 847,559 571,628 361,730 336,688 556,584 840,511 1125,494 1504,560 1767,671',
+          shape: 'polygon',
+        },
+        rows: {
+          IX: {
+            seats: [
+              1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+              20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
+            ],
+            total_seats: '31',
+          },
+        },
+        seatPrice: 15,
+      },
+      X: {
+        location: {
+          points:
+            '1745,632 1526,544 1127,468 843,482 571,549 358,647 338,604 561,507 839,440 1126,423 1543,499 1766,591',
+          shape: 'polygon',
+        },
+        rows: {
+          X: {
+            seats: [
+              1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+              20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
+            ],
+            total_seats: '31',
+          },
+        },
+        seatPrice: 15,
+      },
+      XI: {
+        location: {
+          points:
+            '1748,555 1530,468 1354,424 1127,392 845,407 573,476 356,567 333,521 560,429 838,363 1125,349 1361,379 1544,424 1771,510',
+          shape: 'polygon',
+        },
+        rows: {
+          XI: {
+            seats: [
+              1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+              20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
+            ],
+            total_seats: '31',
+          },
+        },
+        seatPrice: 15,
+      },
+      XII: {
+        location: {
+          points:
+            '1751,474 1448,370 1127,325 891,331 620,385 355,484 334,442 605,341 887,285 1126,280 1452,328 1766,432',
+          shape: 'polygon',
+        },
+        rows: {
+          XII: {
+            seats: [
+              1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+              20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
+            ],
+            total_seats: '31',
+          },
+        },
+        seatPrice: 15,
+      },
+      XIII: {
+        location: {
+          points:
+            '1744,394 1439,292 1128,253 891,260 616,308 440,370 428,326 608,265 887,212 1129,207 1447,248 1763,351',
+          shape: 'polygon',
+        },
+        rows: {
+          XIII: {
+            seats: [
+              1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+              20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
+            ],
+            total_seats: '29',
+          },
+        },
+        seatPrice: 15,
+      },
+      XIV: {
+        location: {
+          points:
+            '1714,296 1447,217 1121,176 871,178 616,230 392,304 378,263 606,186 860,133 1121,130 1453,169 1729,252',
+          shape: 'polygon',
+        },
+        rows: {
+          XIV: {
+            seats: [
+              1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+              20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
+            ],
+            total_seats: '29',
+          },
+        },
+        seatPrice: 15,
       },
     },
-    name: "Zetra",
-    location: "Test",
-    type: "hall",
-    __v: 0,
   });
   const [rows, setRows] = useState();
 
@@ -137,48 +290,48 @@ export const DrawPlace = () => {
   function handleShapeClick(e) {
     const tagName = e.target.tagName.toLowerCase();
 
-    if (tagName === "polygon" || tagName === "rect") {
-      if (document.querySelector(".highlighted"))
-        document.querySelector(".highlighted").classList.remove("highlighted");
-      e.target.classList.add("highlighted");
+    if (tagName === 'polygon' || tagName === 'rect') {
+      if (document.querySelector('.highlighted'))
+        document.querySelector('.highlighted').classList.remove('highlighted');
+      e.target.classList.add('highlighted');
       setVisibility(true);
     } else {
-      if (document.querySelector(".highlighted") && tagName !== "circle")
-        document.querySelector(".highlighted").classList.remove("highlighted");
+      if (document.querySelector('.highlighted') && tagName !== 'circle')
+        document.querySelector('.highlighted').classList.remove('highlighted');
     }
   }
 
   // Set active link
   function setActiveLink(e) {
-    document.querySelector(".active-link").classList.remove("active-link");
-    e.target.classList.add("active-link");
-    if (document.querySelector(".highlighted"))
-      document.querySelector(".highlighted").classList.remove("highlighted");
+    document.querySelector('.active-link').classList.remove('active-link');
+    e.target.classList.add('active-link');
+    if (document.querySelector('.highlighted'))
+      document.querySelector('.highlighted').classList.remove('highlighted');
   }
 
   useEffect(() => {
     function handleDelete(event) {
-      if (event.key === "Backspace" && document.querySelector(".highlighted")) {
-        const highlighted = document.querySelector(".highlighted");
+      if (event.key === 'Backspace' && document.querySelector('.highlighted')) {
+        const highlighted = document.querySelector('.highlighted');
 
         document
           .querySelectorAll('circle[visibility="visible"]')
           .forEach((circle) => {
-            circle.style.visibility = "hidden";
+            circle.style.visibility = 'hidden';
           });
         highlighted.remove();
       }
     }
 
     if (!modal) {
-      document.addEventListener("keydown", handleDelete);
+      document.addEventListener('keydown', handleDelete);
     } else {
-      document.removeEventListener("keydown", handleDelete);
+      document.removeEventListener('keydown', handleDelete);
     }
 
     // Clean up the event listener when the component unmounts or when modal changes
     return () => {
-      document.removeEventListener("keydown", handleDelete);
+      document.removeEventListener('keydown', handleDelete);
     };
   }, [modal]);
 
@@ -189,15 +342,15 @@ export const DrawPlace = () => {
 
   // Save zone
   function saveZone() {
-    const zone = document.querySelector(".highlighted");
+    const zone = document.querySelector('.highlighted');
 
-    const rowElements = document.querySelectorAll(".rows-wrapper > div");
-    const zoneName = document.querySelector(".zone-input").value;
+    const rowElements = document.querySelectorAll('.rows-wrapper > div');
+    const zoneName = document.querySelector('.zone-input').value;
 
     let zonesData;
 
-    if ("polygon" === zone.tagName) {
-      const pointsString = zone.getAttribute("points");
+    if ('polygon' === zone.tagName) {
+      const pointsString = zone.getAttribute('points');
       zonesData = {
         location: {
           points: pointsString,
@@ -206,10 +359,10 @@ export const DrawPlace = () => {
         rows: {},
       };
     } else {
-      const x = zone.getAttribute("x");
-      const y = zone.getAttribute("y");
-      const w = zone.getAttribute("width");
-      const h = zone.getAttribute("height");
+      const x = zone.getAttribute('x');
+      const y = zone.getAttribute('y');
+      const w = zone.getAttribute('width');
+      const h = zone.getAttribute('height');
 
       zonesData = {
         location: {
@@ -223,7 +376,7 @@ export const DrawPlace = () => {
 
     rowElements.forEach((rowElement, index) => {
       const rowNameInput = rowElement.querySelector("input[type='text']");
-      const rowSeatsInput = rowElement.querySelector(".row-input");
+      const rowSeatsInput = rowElement.querySelector('.row-input');
       const rowName = rowNameInput.value;
       const numSeats = rowSeatsInput.value;
 
@@ -237,7 +390,7 @@ export const DrawPlace = () => {
       zonesData.rows[rowName] = rowObject; // Storing the row object using the rowName as the key
     });
 
-    const seatPriceInput = document.querySelector(".seats-price-wrapper input");
+    const seatPriceInput = document.querySelector('.seats-price-wrapper input');
     const seatPrice = seatPriceInput.value;
 
     zonesData.seatPrice = Number(seatPrice);
@@ -253,8 +406,8 @@ export const DrawPlace = () => {
     //Warnings outlines
     let counter = 0;
     document.querySelectorAll(`.zone-input`).forEach((e, i) => {
-      if (e.value === "") {
-        e.style = "outline: 2px solid #f4cd46;";
+      if (e.value === '') {
+        e.style = 'outline: 2px solid #f4cd46;';
         counter++;
       }
     });
@@ -264,20 +417,20 @@ export const DrawPlace = () => {
     } else {
       setVisibility(false);
       setNumOfRows(1);
-      document.querySelector(".highlighted").classList.add("done");
-      document.querySelector(".highlighted").classList.remove("highlighted");
+      document.querySelector('.highlighted').classList.add('done');
+      document.querySelector('.highlighted').classList.remove('highlighted');
       document
         .querySelectorAll('circle[visibility="visible"]')
         .forEach((circle) => {
-          circle.style.visibility = "hidden";
+          circle.style.visibility = 'hidden';
         });
     }
   }
 
   function handleZoneClick(e, data) {
-    if (document.querySelector(".highlighted"))
-      document.querySelector(".highlighted").classList.remove("highlighted");
-    e.target.classList.add("highlighted");
+    if (document.querySelector('.highlighted'))
+      document.querySelector('.highlighted').classList.remove('highlighted');
+    e.target.classList.add('highlighted');
 
     setRows(data[1].rows);
   }
@@ -294,7 +447,7 @@ export const DrawPlace = () => {
     console.log(newData);
   };
   return (
-    <div style={img && { height: "100vh" }} className="draw-place-container">
+    <div style={img && { height: '100vh' }} className="draw-place-container">
       {modal && (
         <>
           <div className="draw-modal">
@@ -303,7 +456,7 @@ export const DrawPlace = () => {
               type="string"
               placeholder="Naziv zone"
               onInput={(e) => {
-                e.target.style = "outline: none;";
+                e.target.style = 'outline: none;';
                 setZoneName(e.target.value); // Update the state with input value
               }}
             />
@@ -318,22 +471,22 @@ export const DrawPlace = () => {
                       type="text"
                       placeholder="Row Name"
                       onInput={(e) => {
-                        e.target.style = "outline: none;";
+                        e.target.style = 'outline: none;';
                         const inputValue = e.target.value;
                         const h6Element =
-                          e.target.parentElement.querySelector(".row-name"); // Select the corresponding h6 element
+                          e.target.parentElement.querySelector('.row-name'); // Select the corresponding h6 element
                         h6Element.textContent = `Row: ${inputValue}`;
                       }}
                     />
                     <div className="row-wrapper">
-                      <h6 className="row-name">Row:</h6>{" "}
+                      <h6 className="row-name">Row:</h6>{' '}
                       {/* Use a class for selecting */}
                       <input
                         className="zone-input row-input"
                         type="number"
                         placeholder="Number of Seats"
                         onInput={(e) => {
-                          e.target.style = "outline: none;";
+                          e.target.style = 'outline: none;';
                         }}
                       />
                     </div>
@@ -346,7 +499,7 @@ export const DrawPlace = () => {
               <p>Seat Price for this Zone</p>
               <input
                 onInput={(e) => {
-                  e.target.style = "outline: none;";
+                  e.target.style = 'outline: none;';
                 }}
                 className="zone-input"
                 type="number"
@@ -377,7 +530,7 @@ export const DrawPlace = () => {
           <h5 className="test">Unesite sliku za iscrtavanje</h5>
           <label className="add-image-label">
             <input
-              style={{ display: "none" }}
+              style={{ display: 'none' }}
               type="file"
               accept="image/*"
               onChange={handleImageUpload}
@@ -394,7 +547,7 @@ export const DrawPlace = () => {
               type="text"
               placeholder="Naziv objekta"
               onInput={(e) => {
-                e.target.style = "outline: none;";
+                e.target.style = 'outline: none;';
                 setObjectName(e.target.value); // Update the state with input value
               }}
             />
@@ -404,7 +557,7 @@ export const DrawPlace = () => {
               type="text"
               placeholder="Lokacija objekta"
               onInput={(e) => {
-                e.target.style = "outline: none;";
+                e.target.style = 'outline: none;';
                 setLocation(e.target.value); // Update the state with input value
               }}
             />
@@ -482,7 +635,7 @@ export const DrawPlace = () => {
               preDrawnShapes={data}
             />
             <div className="seats-container">
-              <h5>{rows ? "Odaberite sjedalo" : "Niste odabrali zonu"}</h5>
+              <h5>{rows ? 'Odaberite sjedalo' : 'Niste odabrali zonu'}</h5>
               {rows &&
                 Object.entries(rows).map(([key, value], i) => {
                   return (
@@ -492,8 +645,8 @@ export const DrawPlace = () => {
                         <div
                           className={`seat ${
                             !value.seats.includes(index + 1)
-                              ? "reserved-seat"
-                              : ""
+                              ? 'reserved-seat'
+                              : ''
                           }`}
                           key={index}
                         >

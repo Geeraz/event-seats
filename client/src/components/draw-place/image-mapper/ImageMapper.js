@@ -1,5 +1,6 @@
 import { editor } from '@overlapmedia/imagemapper';
 import React from 'react';
+import { Tooltip } from 'react-tooltip';
 
 function ImageMapper({
   options = {},
@@ -61,10 +62,30 @@ function ImageMapper({
         }
       }}
     >
+      <Tooltip
+        style={{ borderRadius: '10px', backgroundColor: '#455cd9' }}
+        anchorId="tooltip-id"
+        place="bottom"
+        variant="info"
+        content="Ovdje možete dodavati račune za kontolore ulaza. Takav račun će imati QR code skener"
+      />
       {preDrawnShapes &&
         Object.entries(preDrawnShapes.zones).map(
           ([zoneName, zoneData], index) => {
             let centerX, centerY;
+            let totalSeats = 0;
+            let totalRemainingSeats = 0;
+
+            Object.entries(zoneData.rows).map(([key, value]) => {
+              totalSeats += Number(value.total_seats);
+              totalRemainingSeats += value.seats.length;
+            });
+
+            const containerStyle = `rgb(160, ${Math.floor(
+              (totalRemainingSeats / totalSeats) * 255
+            )}, 0)`;
+
+            console.log(containerStyle);
 
             if (zoneData.location.shape === 'rect') {
               // Calculate center for rectangle
@@ -75,22 +96,24 @@ function ImageMapper({
                 Number(zoneData.location.position.y) +
                 Number(zoneData.location.size.height) / 2;
             } else if (zoneData.location.shape === 'polygon') {
-              // Calculate center for polygon
               const pointsArray = zoneData.location.points
                 .split(' ')
                 .map((point) =>
                   point.split(',').map((coord) => parseInt(coord))
                 );
-              const xSum = pointsArray.reduce(
-                (sum, point) => sum + point[0],
-                0
+
+              // Calculate the highest Y point
+              const highestY = Math.min(
+                ...pointsArray.map((point) => point[1])
               );
-              const ySum = pointsArray.reduce(
-                (sum, point) => sum + point[1],
-                0
-              );
-              centerX = xSum / pointsArray.length;
-              centerY = ySum / pointsArray.length;
+
+              // Reduce the highest Y point by 5
+              const adjustedY = highestY + 25;
+
+              centerX =
+                pointsArray.reduce((sum, point) => sum + point[0], 0) /
+                pointsArray.length;
+              centerY = adjustedY; // Use the adjusted Y coordinate
             }
 
             if (zoneData.location.shape === 'rect') {
@@ -119,12 +142,8 @@ function ImageMapper({
                     dominantBaseline="middle"
                     textAnchor="middle"
                     fontSize="12"
-                    fill="black"
-                    style={{
-                      pointerEvents: 'none',
-                      fill: '#455cd9',
-                      fontWeight: '600',
-                    }}
+                    fill="#455cd9" // Set the color using the fill attribute
+                    pointerEvents="none"
                   >
                     {zoneName}
                   </text>
@@ -136,7 +155,7 @@ function ImageMapper({
                 <g key={`pol_${index}`}>
                   <polygon
                     points={zoneData.location.points}
-                    fill="rgb(102, 102, 102)"
+                    fill={containerStyle}
                     stroke="rgb(51, 51, 51)"
                     cursor="pointer"
                     strokeWidth="1"
@@ -154,14 +173,10 @@ function ImageMapper({
                     dominantBaseline="middle"
                     textAnchor="middle"
                     fontSize="12"
-                    fill="black"
-                    style={{
-                      pointerEvents: 'none',
-                      fill: '#455cd9',
-                      fontWeight: '600',
-                    }}
+                    fill="#455cd9" // Set the color using the fill attribute
+                    pointerEvents="none"
                   >
-                    {zoneName}
+                    {zoneName} {totalRemainingSeats} / {totalSeats}
                   </text>
                 </g>
               );
