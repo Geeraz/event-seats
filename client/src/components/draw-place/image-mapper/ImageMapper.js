@@ -71,7 +71,7 @@ function ImageMapper({
                 opacity="0.5"
                 strokeDasharray="none"
                 strokeLinejoin="miter"
-                id="rect_1"
+                id={shape.zoneName}
                 width={shape.data.width}
                 x={shape.data.x}
                 height={shape.data.height}
@@ -90,7 +90,7 @@ function ImageMapper({
                 opacity="0.5"
                 strokeDasharray="4 3"
                 strokeLinejoin="round"
-                id="polygon_3"
+                id={shape.zoneName}
               ></polygon>
             );
           }

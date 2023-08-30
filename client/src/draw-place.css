@@ -1,3 +1,6 @@
+* {
+  font-family: sans-serif;
+}
 .draw-place-container {
   position: relative;
 }
@@ -111,6 +114,17 @@
   pointer-events: none;
   margin-left: 10px;
 }
+.draw-place-container .draw-modal .row-wrapper {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-evenly;
+
+  gap: 20px;
+}
+.draw-place-container .draw-modal .row-wrapper .row-input {
+  margin: 0;
+}
 .draw-place-container .draw-modal {
   position: absolute;
   background-color: #fff;
@@ -176,7 +190,6 @@
   margin-top: 30px;
 }
 .draw-place-container .draw-modal div .row-wrapper {
-  height: 115px;
   overflow-y: auto;
 }
 .draw-place-container .draw-modal .seats-price-wrapper {
