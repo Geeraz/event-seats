@@ -16,6 +16,10 @@ export const DrawPlace = () => {
   const [location, setLocation] = useState("");
   const [zoneName, setZoneName] = useState("");
   const [selectedType, setSelectedType] = useState("hall"); //
+  const [orientation, setOrientation] = useState({
+    rows: "rows",
+    seats: "column-reverse",
+  });
   const [data, setData] = useState({
     name: "BNP",
     location: "Zenica",
@@ -363,6 +367,7 @@ export const DrawPlace = () => {
           size: { width: w, height: h },
           shape: zone.tagName,
         },
+        orientation,
         rows: {}, // Using an object to store row objects
       };
     }
@@ -383,7 +388,6 @@ export const DrawPlace = () => {
     });
 
     zonesData.total_amount = Number(total_amount);
-    zonesData.seatPrice = 0;
 
     setZones((prevZones) => ({
       ...prevZones,
@@ -450,27 +454,56 @@ export const DrawPlace = () => {
                 setZoneName(e.target.value); // Update the state with input value
               }}
             />
+            <div className="zone-inputs">
+              <div className="">
+                Rows-orientation
+                <select
+                  className="zone"
+                  onChange={(e) => {
+                    setOrientation((prevData) => ({
+                      ...prevData,
+                      rows: e.target.value,
+                    }));
+                  }}
+                  value={orientation.rows}
+                >
+                  <option value="row">Row</option>
+                  <option value="row-reverse">Row Reverse</option>
+                  <option value="column">Column</option>
+                  <option value="column-reverse">Column Reverse</option>
+                </select>
+              </div>
+              <div className="">
+                Column orientation
+                <select
+                  className="zone"
+                  onChange={(e) => {
+                    setOrientation((prevData) => ({
+                      ...prevData,
+                      seats: e.target.value,
+                    }));
+                  }}
+                  value={orientation.seats}
+                >
+                  <option value="row">Row</option>
+                  <option value="row-reverse">Row Reverse</option>
+                  <option value="column">Column</option>
+                  <option value="column-reverse">Column Reverse</option>
+                </select>
+              </div>
+            </div>
+
             <h6 className="main-modal-heading">Zone Information</h6>
             <div>
-              <p>Rows</p>
               <div className="rows-wrapper">
                 {Array.from({ length: numOfRows }, (_, i) => (
-                  <div key={i}>
+                  <div key={i} className="row-wrapper">
                     <input
                       className="zone-input"
                       type="text"
                       placeholder="Row Name"
-                      onInput={(e) => {
-                        e.target.style = "outline: none;";
-                        const inputValue = e.target.value;
-                        const h6Element =
-                          e.target.parentElement.querySelector(".row-name"); // Select the corresponding h6 element
-                        h6Element.textContent = `Row: ${inputValue}`;
-                      }}
                     />
                     <div className="row-wrapper">
-                      <h6 className="row-name">Row:</h6>{" "}
-                      {/* Use a class for selecting */}
                       <input
                         className="zone-input row-input"
                         type="number"

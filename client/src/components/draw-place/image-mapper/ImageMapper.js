@@ -1,6 +1,6 @@
-import { editor } from '@overlapmedia/imagemapper';
-import React from 'react';
-import { Tooltip } from 'react-tooltip';
+import { editor } from "@overlapmedia/imagemapper";
+import React from "react";
+import { Tooltip } from "react-tooltip";
 
 function ImageMapper({
   options = {},
@@ -63,7 +63,7 @@ function ImageMapper({
       }}
     >
       <Tooltip
-        style={{ borderRadius: '10px', backgroundColor: '#455cd9' }}
+        style={{ borderRadius: "10px", backgroundColor: "#455cd9" }}
         anchorId="tooltip-id"
         place="bottom"
         variant="info"
@@ -85,9 +85,7 @@ function ImageMapper({
               (totalRemainingSeats / totalSeats) * 255
             )}, 0)`;
 
-            console.log(containerStyle);
-
-            if (zoneData.location.shape === 'rect') {
+            if (zoneData.location.shape === "rect") {
               // Calculate center for rectangle
               centerX =
                 Number(zoneData.location.position.x) +
@@ -95,11 +93,11 @@ function ImageMapper({
               centerY =
                 Number(zoneData.location.position.y) +
                 Number(zoneData.location.size.height) / 2;
-            } else if (zoneData.location.shape === 'polygon') {
+            } else if (zoneData.location.shape === "polygon") {
               const pointsArray = zoneData.location.points
-                .split(' ')
+                .split(" ")
                 .map((point) =>
-                  point.split(',').map((coord) => parseInt(coord))
+                  point.split(",").map((coord) => parseInt(coord))
                 );
 
               // Calculate the highest Y point
@@ -116,7 +114,7 @@ function ImageMapper({
               centerY = adjustedY; // Use the adjusted Y coordinate
             }
 
-            if (zoneData.location.shape === 'rect') {
+            if (zoneData.location.shape === "rect") {
               return (
                 <g key={`rect_${index}`}>
                   <rect
@@ -149,7 +147,7 @@ function ImageMapper({
                   </text>
                 </g>
               );
-            } else if (zoneData.location.shape === 'polygon') {
+            } else if (zoneData.location.shape === "polygon") {
               // Similar modification for polygons
               return (
                 <g key={`pol_${index}`}>
@@ -189,11 +187,11 @@ function ImageMapper({
 }
 
 export const Mode = Object.freeze({
-  RECT: 'rect',
-  CIRCLE: 'circle',
-  ELLIPSE: 'ellipse',
-  POLYGON: 'polygon',
-  SELECT: 'selectMode',
+  RECT: "rect",
+  CIRCLE: "circle",
+  ELLIPSE: "ellipse",
+  POLYGON: "polygon",
+  SELECT: "selectMode",
 });
 
 export default ImageMapper;

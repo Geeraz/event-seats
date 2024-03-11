@@ -1,4 +1,7 @@
 * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   font-family: sans-serif;
 }
 .draw-place-container {
@@ -138,8 +141,6 @@ polygon:hover {
   background-color: #fff;
   width: fit-content;
   border-radius: 10px;
-  top: 30%;
-  transform: translateY(-50%);
   right: 0;
   left: 0;
   margin: 0 auto;
@@ -153,12 +154,11 @@ polygon:hover {
   font-weight: 600;
 }
 .draw-place-container .draw-modal .main-modal-heading {
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 .draw-place-container .draw-modal div {
   background-color: #d9def7;
   border-radius: 5px;
-  padding: 0 0 10px 0;
 }
 .draw-place-container .draw-modal div p {
   display: inline-block;
@@ -197,20 +197,26 @@ polygon:hover {
   display: block;
   margin-top: 30px;
 }
+.row-name {
+  margin: 0;
+}
+.row-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
 .draw-place-container .draw-modal div .row-wrapper {
   overflow-y: auto;
 }
-.draw-place-container .draw-modal .seats-price-wrapper {
-  margin-top: 30px;
-}
+
 .draw-place-container .draw-modal .seats-price-wrapper input {
-  margin: 20px auto;
+  margin: 10px auto;
 }
 .draw-place-container .draw-modal .save-zone {
   display: block;
   text-decoration: none;
   width: fit-content;
-  margin: 20px auto 0;
+  margin: 10px auto 0;
   background-color: #f4cd46;
   color: #343434;
   font-weight: 600;
